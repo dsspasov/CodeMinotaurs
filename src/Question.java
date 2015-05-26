@@ -9,8 +9,8 @@ public class Question {
     public Question(){
         super();
     }
-    
-    public Question(String question, String answer){
+     
+    public Question(String question,List<String> answers, String answer){
         this.setQuestion(question);
         this.setAnswers(answers);
         this.setCorrectAnswer(answer);
