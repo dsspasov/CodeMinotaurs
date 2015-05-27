@@ -40,7 +40,7 @@ public class JSONReader {
             for(Object object: listOfObjects){
                 JSONObject jsonObject = (JSONObject) object;
                 
-                String id = (String)jsonObject.get("id");
+                int id = (int)jsonObject.get("id");
                 String question = (String)jsonObject.get("question");
                 String correctAnswer = (String)jsonObject.get("correctAnswer");
                 
@@ -51,7 +51,7 @@ public class JSONReader {
                     answers.add((String) answer);                    
                 }
                 
-                this.listOfQuestions.add(new Question(question, answers ,correctAnswer));
+                this.listOfQuestions.add(new Question(question, answers ,correctAnswer, id));
                               
             }
             
