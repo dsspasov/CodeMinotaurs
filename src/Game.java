@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.FileNotFoundException;
 import java.util.Random;
 
 import javax.swing.JButton;
@@ -50,15 +51,25 @@ public class Game extends JFrame {
      * Create the frame.
      */
     int numberOfQuestions;
+
     public int getLength() {
-        x=new JSONReader(path);
+        x = new JSONReader(path);
         x.read();
         numberOfQuestions = x.getListOfQuestions().size();
         return numberOfQuestions;
     }
-    
+
+    public void disableAll() {
+        rdbtnA.setEnabled(false);
+        rdbtnB.setEnabled(false);
+        rdbtnC.setEnabled(false);
+        rdbtnD.setEnabled(false);
+
+    }
+
     Random rand = new Random();
     int questionIndex = (int) rand.nextInt(getLength());
+    int killingSpree = 0;
 
     public JButton getNextQuestionButton() {
         return btnNextQuestion;
@@ -72,78 +83,87 @@ public class Game extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
 
-        /*x = new JSONReader(path);
-        x.read();*/
-
         JLabel labelA = new JLabel("");
-        labelA.setBounds(10, 277, 16, 23);
+        labelA.setBounds(49, 382, 16, 14);
         contentPane.setLayout(null);
         contentPane.add(labelA);
 
         JLabel labelC = new JLabel("");
-        labelC.setBounds(10, 327, 16, 14);
+        labelC.setBounds(49, 437, 16, 14);
         contentPane.add(labelC);
 
         JLabel labelB = new JLabel("");
-        labelB.setBounds(10, 297, 16, 14);
+        labelB.setBounds(49, 407, 16, 14);
         contentPane.add(labelB);
 
         JLabel labelD = new JLabel("");
-        labelD.setBounds(10, 352, 16, 14);
+        labelD.setBounds(49, 462, 16, 14);
         contentPane.add(labelD);
 
         JLabel labelScore = new JLabel("0");
-        labelScore.setBounds(374, 243, 91, 14);
+        labelScore.setBounds(413, 348, 91, 14);
         contentPane.add(labelScore);
 
         JLabel labelQuestion = new JLabel(x.getListOfQuestions().get(questionIndex).getQuestion().toString());
-        labelQuestion.setBounds(10, 178, 587, 54);
+        labelQuestion.setBounds(10, 178, 730, 107);
         contentPane.add(labelQuestion);
         rdbtnA = new JRadioButton(x.getListOfQuestions().get(questionIndex).getAnswers().get(0));
-        rdbtnA.setBounds(32, 268, 565, 23);
+        rdbtnA.setBounds(71, 376, 565, 23);
         rdbtnA.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (rdbtnA.isSelected() == true) {
-                    if (rdbtnA.getText().equals(
-                            x.getListOfQuestions().get(questionIndex).getCorrectAnswer().toString())) {
-                        rdbtnB.setEnabled(false);
-                        rdbtnC.setEnabled(false);
-                        rdbtnD.setEnabled(false);
+                    if (rdbtnA.getText()
+                            .equals(x.getListOfQuestions().get(questionIndex).getCorrectAnswer().toString())) {
+                        disableAll();
                         labelA.setIcon(checkIcon);
+                        killingSpree++;
+                        if (killingSpree == 3) {
+                            try {
+                                Audio.playThatTrack();
+                            } catch (FileNotFoundException e1) {
+                                e1.printStackTrace();
+                            }
+                        }
+
                         labelScore.setText(String.valueOf(Integer.parseInt(labelScore.getText()) + 300));
                         btnNextQuestion.setVisible(true);
-
                     } else {
-                        rdbtnB.setEnabled(false);
-                        rdbtnC.setEnabled(false);
-                        rdbtnD.setEnabled(false);
+                        killingSpree = 0;
+                        disableAll();
                         labelA.setIcon(crossIcon);
                         btnNextQuestion.setVisible(true);
                     }
-
                 }
+
             }
+
         });
         contentPane.add(rdbtnA);
 
         rdbtnB = new JRadioButton(x.getListOfQuestions().get(questionIndex).getAnswers().get(1));
-        rdbtnB.setBounds(32, 297, 565, 23);
+        rdbtnB.setBounds(71, 402, 565, 23);
         rdbtnB.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (rdbtnB.isSelected() == true) {
-                    if (rdbtnB.getText().equals(
-                            x.getListOfQuestions().get(questionIndex).getCorrectAnswer().toString())) {
-                        rdbtnA.setEnabled(false);
-                        rdbtnC.setEnabled(false);
-                        rdbtnD.setEnabled(false);
+                    if (rdbtnB.getText()
+                            .equals(x.getListOfQuestions().get(questionIndex).getCorrectAnswer().toString())) {
+                        disableAll();
                         labelB.setIcon(checkIcon);
+                        killingSpree++;
+                        if (killingSpree == 3) {
+                            try {
+                                Audio.playThatTrack();
+                            } catch (FileNotFoundException e1) {
+                                e1.printStackTrace();
+                            }
+                        }
+
                         labelScore.setText(String.valueOf(Integer.parseInt(labelScore.getText()) + 300));
                         btnNextQuestion.setVisible(true);
 
                     } else {
-                        rdbtnA.setEnabled(false);
-                        rdbtnC.setEnabled(false);
-                        rdbtnD.setEnabled(false);
+                        killingSpree = 0;
+                        disableAll();
                         labelB.setIcon(crossIcon);
                         btnNextQuestion.setVisible(true);
                     }
@@ -153,53 +173,70 @@ public class Game extends JFrame {
         contentPane.add(rdbtnB);
 
         rdbtnC = new JRadioButton(x.getListOfQuestions().get(questionIndex).getAnswers().get(2));
-        rdbtnC.setBounds(32, 323, 565, 23);
+        rdbtnC.setBounds(71, 428, 565, 23);
         labelC.setIcon(null);
         rdbtnC.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (rdbtnC.isSelected() == true) {
-                    if (rdbtnC.getText().equals(x.getListOfQuestions().get(questionIndex).getCorrectAnswer().toString())) {
-                        rdbtnB.setEnabled(false);
-                        rdbtnA.setEnabled(false);
-                        rdbtnD.setEnabled(false);
+                    if (rdbtnC.getText()
+                            .equals(x.getListOfQuestions().get(questionIndex).getCorrectAnswer().toString())) {
+                        disableAll();
                         labelC.setIcon(checkIcon);
+                        killingSpree++;
+                        if (killingSpree == 3) {
+                            try {
+                                Audio.playThatTrack();
+                            } catch (FileNotFoundException e1) {
+                                e1.printStackTrace();
+                            }
+                        }
+
                         labelScore.setText(String.valueOf(Integer.parseInt(labelScore.getText()) + 300));
                         btnNextQuestion.setVisible(true);
 
                     } else {
-                        rdbtnB.setEnabled(false);
-                        rdbtnA.setEnabled(false);
-                        rdbtnD.setEnabled(false);
+                        killingSpree = 0;
+                        disableAll();
                         labelC.setIcon(crossIcon);
                         btnNextQuestion.setVisible(true);
                     }
                 }
             }
+
         });
         contentPane.add(rdbtnC);
 
         rdbtnD = new JRadioButton(x.getListOfQuestions().get(questionIndex).getAnswers().get(3));
-        rdbtnD.setBounds(32, 349, 565, 23);
+        rdbtnD.setBounds(71, 454, 565, 23);
         rdbtnD.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (rdbtnD.isSelected() == true) {
-                    if (rdbtnD.getText().equals(x.getListOfQuestions().get(questionIndex).getCorrectAnswer().toString())) {
-                        rdbtnB.setEnabled(false);
-                        rdbtnC.setEnabled(false);
-                        rdbtnA.setEnabled(false);
+                    if (rdbtnD.getText()
+                            .equals(x.getListOfQuestions().get(questionIndex).getCorrectAnswer().toString())) {
+                        disableAll();
                         labelD.setIcon(checkIcon);
-                        labelScore.setText(String.valueOf(Integer.parseInt(labelScore.getText()) + 300));
-                        btnNextQuestion.setVisible(true);
+                        killingSpree++;
+                        if (killingSpree == 3) {
+                            try {
+                                Audio.playThatTrack();
+                            } catch (FileNotFoundException e1) {
+                                e1.printStackTrace();
+                            }
+                        }
+                            labelScore.setText(String.valueOf(Integer.parseInt(labelScore.getText()) + 300));
+                            btnNextQuestion.setVisible(true);
+                        
 
-                    } else {
-                        rdbtnB.setEnabled(false);
-                        rdbtnC.setEnabled(false);
-                        rdbtnA.setEnabled(false);
-                        labelD.setIcon(crossIcon);
-                        btnNextQuestion.setVisible(true);
-                    }
+                        } else {
+                            killingSpree = 0;
+                            disableAll();
+                            labelD.setIcon(crossIcon);
+                            btnNextQuestion.setVisible(true);
+                        }
                 }
+
             }
+
         });
         contentPane.add(rdbtnD);
 
@@ -209,7 +246,7 @@ public class Game extends JFrame {
         contentPane.add(labelLabirinth);
 
         labelPlayer = new JLabel("New label");
-        labelPlayer.setBounds(10, 243, 230, 14);
+        labelPlayer.setBounds(71, 348, 230, 14);
         contentPane.add(labelPlayer);
 
         btnNextQuestion = new JButton("Next question");
@@ -237,7 +274,7 @@ public class Game extends JFrame {
 
             }
         });
-        btnNextQuestion.setBounds(475, 402, 125, 23);
+        btnNextQuestion.setBounds(514, 507, 125, 23);
         contentPane.add(btnNextQuestion);
 
     }
