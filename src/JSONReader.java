@@ -60,11 +60,12 @@ public class JSONReader {
         }
         
     }
-
+    /*
     public static void main(String[] args) {
         String path = "C:/Users/user/Desktop/questions.json";
         JSONReader x =new JSONReader(path);
         x.read();
         System.out.println(x.getListOfQuestions().get(0).getCorrectAnswer().toString());
     }
+    */
 }
