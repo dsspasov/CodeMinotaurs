@@ -62,127 +62,18 @@ public class Field {
 			break;
 		}
 	}
-		
-	
 
-	/*private void generateStartingPossition() { // It can drop a player on 2*k or 2*k+1 place so it is not fair but we can change it.
-		Random a = new Random();
-		Random b = new Random();
-		int numberOfPlayers = this.numberOfPlayers;
-		int sideOfTheField = b.nextInt(4);
-		int minToMax = a.nextInt(sizeOfTheField);
-		
-		switch (sideOfTheField) {
-		case 0:
-			startX = 0;
-			startY = minToMax;
-			break;
-		case 1:
-			startX = minToMax;
-			startY = 0;
-			break;
-		case 2:
-			startX = sizeOfTheField - 1;
-			startY = minToMax;
-			break;
-		case 3:
-			startX = minToMax;
-			startY = sizeOfTheField - 1;
-			break;
-		}
-	}*/
 
 	private void generatePathsForPlayersInTheMatrix() {
 		
 	}
-	Path randomPathGenerator(Cordinates from, Cordinates to, int lenghtOfThePath){
-		
-		
+	
+	private Path randomPathGenerator(Cordinates from, Cordinates to, int lenghtOfThePath){
 		
 		return null;
-		
-		
 	}
 
 }
 
-class Cordinates {
-	int x;
-	int y;
 
-	Cordinates(int x, int y) {
-		this.x = x;
-		this.y = y;
-	}
-	
-	public void set(int x, int y){
-		this.x = x;
-		this.y = y;
-	}
-	public void setX(int x){
-		this.x = x;
-	}
-	public void setY(int y){
-		this.y = y;
-	}
-	
-	public int getX(){
-		return this.x;
-	}
-	public int getY(){
-		return this.y;
-	}
-	
-	boolean equals(Cordinates a){
-		if(this.x == a.x && this.y== a.y){
-			return true;
-		} else {
-			return false;
-		}
-	}
-}
-class Path {
-	public List<Cordinates> listOfCordinates;
-	public int length;
-	
-	Path(int length){
-		listOfCordinates = new ArrayList<Cordinates>();
-		this.length = length;
-	}
-	void add(Cordinates a){
-		listOfCordinates.add(a);
-	}
-	public void pathGenerator(Cordinates from, Cordinates to){
-		Random a = new Random();
-		int fromX = from.x;
-		int fromY = from.y;
-		int minNumberOfSteps = (to.x - from.x) + (to.y - from.y);
-		listOfCordinates.add(new Cordinates(fromX, fromY)); // we have got the 1st point here so the loop will iterate -1
-		if(length == minNumberOfSteps){
-		int i = 0;
-				while(i!= minNumberOfSteps-1){
-				if(fromX < to.x){
-					fromX++;
-					listOfCordinates.add(new Cordinates(fromX, fromY));
-					i++;
-				} else {
-					fromX--;
-					listOfCordinates.add(new Cordinates(fromX, fromY));
-					i++;
-				}
-				
-				if(fromY < to.y){
-					fromY++;
-					listOfCordinates.add(new Cordinates(fromX, fromY));
-					i++;
-				} else {
-					fromY--;
-					listOfCordinates.add(new Cordinates(fromX, fromY));
-					i++;
-				}
-				
-			}
-		}
-		//return null;
-	}
-}
+
