@@ -3,12 +3,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.ImageIcon;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.Random;
 
+import javax.swing.JButton;
 
 public class Game extends JFrame {
 
@@ -17,7 +21,13 @@ public class Game extends JFrame {
      */
     private static final long serialVersionUID = 4503868451640434191L;
     private JPanel contentPane;
+    private JSONReader x;
+    private String path = "C:/Users/Simo/Desktop/questions.json";
     private static JLabel labelPlayer;
+    private JRadioButton rdbtnA, rdbtnB, rdbtnC, rdbtnD;
+    private JButton btnNextQuestion;
+    private Icon checkIcon = new ImageIcon("C:/Users/Simo/Desktop/pics/kk.png");
+    private Icon crossIcon = new ImageIcon("C:/Users/Simo/Desktop/pics/cross.png");
 
     /**
      * Launch the application.
@@ -28,6 +38,7 @@ public class Game extends JFrame {
                 try {
                     Game frame = new Game();
                     frame.setVisible(true);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -38,118 +49,192 @@ public class Game extends JFrame {
     /**
      * Create the frame.
      */
-    
+    Random rand = new Random();
+    int numberOfQuestion = (int) rand.nextInt(56);
+
+    public JButton getNextQuestionButton() {
+        return btnNextQuestion;
+    }
+
     public Game() {
         setTitle("Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 575, 300);
+        setBounds(100, 100, 800, 600);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
-        
+
+        x = new JSONReader(path);
+        x.read();
+
         JLabel labelA = new JLabel("");
-        labelA.setBounds(10, 203, 16, 23);
-        labelA.setVisible(false);
+        labelA.setBounds(10, 277, 16, 23);
         contentPane.setLayout(null);
-        labelA.setIcon(new ImageIcon("C:\\Users\\Simo\\Desktop\\pics\\kk.png"));
         contentPane.add(labelA);
-        
+
         JLabel labelC = new JLabel("");
-        labelC.setBounds(10, 237, 16, 14);
-        labelC.setVisible(false);
-        labelC.setIcon(new ImageIcon("C:\\Users\\Simo\\Desktop\\pics\\cross.png"));
+        labelC.setBounds(10, 327, 16, 14);
         contentPane.add(labelC);
-        
+
         JLabel labelB = new JLabel("");
-        labelB.setBounds(390, 212, 16, 14);
-        labelB.setVisible(false);
-        labelB.setIcon(new ImageIcon("C:\\Users\\Simo\\Desktop\\pics\\cross.png"));
+        labelB.setBounds(10, 297, 16, 14);
         contentPane.add(labelB);
-        
+
         JLabel labelD = new JLabel("");
-        labelD.setBounds(390, 237, 16, 14);
-        labelD.setVisible(false);
-        labelD.setIcon(new ImageIcon("C:\\Users\\Simo\\Desktop\\pics\\cross.png"));
+        labelD.setBounds(10, 352, 16, 14);
         contentPane.add(labelD);
-        
+
         JLabel labelScore = new JLabel("0");
-        labelScore.setBounds(388, 178, 46, 14);
+        labelScore.setBounds(374, 243, 91, 14);
         contentPane.add(labelScore);
-        
-        JRadioButton rdbtnNewRadioButton = new JRadioButton("A");
-        rdbtnNewRadioButton.setBounds(32, 203, 109, 23);
-        rdbtnNewRadioButton.addActionListener(new ActionListener() {
+
+        JLabel labelQuestion = new JLabel(x.getListOfQuestions().get(numberOfQuestion).getQuestion().toString());
+        labelQuestion.setBounds(10, 178, 587, 54);
+        contentPane.add(labelQuestion);
+        rdbtnA = new JRadioButton(x.getListOfQuestions().get(numberOfQuestion).getAnswers().get(0));
+        rdbtnA.setBounds(32, 268, 565, 23);
+        rdbtnA.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(rdbtnNewRadioButton.isSelected() == true){
-                    labelA.setVisible(true);
-                    labelScore.setText(String.valueOf(Integer.parseInt(labelScore.getText()) + 300));
+                if (rdbtnA.isSelected() == true) {
+                    if (rdbtnA.getText().equals(
+                            x.getListOfQuestions().get(numberOfQuestion).getCorrectAnswer().toString())) {
+                        rdbtnB.setEnabled(false);
+                        rdbtnC.setEnabled(false);
+                        rdbtnD.setEnabled(false);
+                        labelA.setIcon(checkIcon);
+                        labelScore.setText(String.valueOf(Integer.parseInt(labelScore.getText()) + 300));
+                        btnNextQuestion.setVisible(true);
+
+                    } else {
+                        rdbtnB.setEnabled(false);
+                        rdbtnC.setEnabled(false);
+                        rdbtnD.setEnabled(false);
+                        labelA.setIcon(crossIcon);
+                        btnNextQuestion.setVisible(true);
+                    }
+
                 }
             }
         });
-        contentPane.add(rdbtnNewRadioButton);
-        
-        JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("C");
-        rdbtnNewRadioButton_1.setBounds(32, 232, 109, 23);
-        rdbtnNewRadioButton_1.addActionListener(new ActionListener() {
+        contentPane.add(rdbtnA);
+
+        rdbtnB = new JRadioButton(x.getListOfQuestions().get(numberOfQuestion).getAnswers().get(1));
+        rdbtnB.setBounds(32, 297, 565, 23);
+        rdbtnB.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(rdbtnNewRadioButton_1.isSelected() == true){
-                    labelA.setVisible(true);
-                    labelC.setVisible(true);
-                    
+                if (rdbtnB.isSelected() == true) {
+                    if (rdbtnB.getText().equals(
+                            x.getListOfQuestions().get(numberOfQuestion).getCorrectAnswer().toString())) {
+                        rdbtnA.setEnabled(false);
+                        rdbtnC.setEnabled(false);
+                        rdbtnD.setEnabled(false);
+                        labelB.setIcon(checkIcon);
+                        labelScore.setText(String.valueOf(Integer.parseInt(labelScore.getText()) + 300));
+                        btnNextQuestion.setVisible(true);
+
+                    } else {
+                        rdbtnA.setEnabled(false);
+                        rdbtnC.setEnabled(false);
+                        rdbtnD.setEnabled(false);
+                        labelB.setIcon(crossIcon);
+                        btnNextQuestion.setVisible(true);
+                    }
                 }
             }
         });
-        contentPane.add(rdbtnNewRadioButton_1);
-        
-        JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("B");
-        rdbtnNewRadioButton_2.setBounds(412, 203, 141, 23);
-        rdbtnNewRadioButton_2.addActionListener(new ActionListener() {
+        contentPane.add(rdbtnB);
+
+        rdbtnC = new JRadioButton(x.getListOfQuestions().get(numberOfQuestion).getAnswers().get(2));
+        rdbtnC.setBounds(32, 323, 565, 23);
+        labelC.setIcon(null);
+        rdbtnC.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(rdbtnNewRadioButton_2.isSelected() == true){
-                    labelA.setVisible(true);
-                    labelB.setVisible(true);
+                if (rdbtnC.isSelected() == true) {
+                    if (rdbtnC.getText().equals(x.getListOfQuestions().get(numberOfQuestion).getCorrectAnswer().toString())) {
+                        rdbtnB.setEnabled(false);
+                        rdbtnA.setEnabled(false);
+                        rdbtnD.setEnabled(false);
+                        labelC.setIcon(checkIcon);
+                        labelScore.setText(String.valueOf(Integer.parseInt(labelScore.getText()) + 300));
+                        btnNextQuestion.setVisible(true);
+
+                    } else {
+                        rdbtnB.setEnabled(false);
+                        rdbtnA.setEnabled(false);
+                        rdbtnD.setEnabled(false);
+                        labelC.setIcon(crossIcon);
+                        btnNextQuestion.setVisible(true);
+                    }
                 }
             }
         });
-        contentPane.add(rdbtnNewRadioButton_2);
-        
-        JRadioButton rdbtnNewRadioButton_3 = new JRadioButton("D");
-        rdbtnNewRadioButton_3.setBounds(412, 232, 141, 23);
-        rdbtnNewRadioButton_3.addActionListener(new ActionListener() {
+        contentPane.add(rdbtnC);
+
+        rdbtnD = new JRadioButton(x.getListOfQuestions().get(numberOfQuestion).getAnswers().get(3));
+        rdbtnD.setBounds(32, 349, 565, 23);
+        rdbtnD.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(rdbtnNewRadioButton_3.isSelected() == true){
-                    labelA.setVisible(true);
-                    labelD.setVisible(true);
+                if (rdbtnD.isSelected() == true) {
+                    if (rdbtnD.getText().equals(x.getListOfQuestions().get(numberOfQuestion).getCorrectAnswer().toString())) {
+                        rdbtnB.setEnabled(false);
+                        rdbtnC.setEnabled(false);
+                        rdbtnA.setEnabled(false);
+                        labelD.setIcon(checkIcon);
+                        labelScore.setText(String.valueOf(Integer.parseInt(labelScore.getText()) + 300));
+                        btnNextQuestion.setVisible(true);
+
+                    } else {
+                        rdbtnB.setEnabled(false);
+                        rdbtnC.setEnabled(false);
+                        rdbtnA.setEnabled(false);
+                        labelD.setIcon(crossIcon);
+                        btnNextQuestion.setVisible(true);
+                    }
                 }
             }
         });
-        contentPane.add(rdbtnNewRadioButton_3);
-        
+        contentPane.add(rdbtnD);
+
         JLabel labelLabirinth = new JLabel("");
         labelLabirinth.setBounds(0, 11, 434, 126);
         labelLabirinth.setIcon(new ImageIcon("C:\\Users\\Simo\\Desktop\\pics\\1282889440_46813_1.jpg"));
         contentPane.add(labelLabirinth);
-        
-        JLabel labelQuestion = new JLabel("Question?");
-        labelQuestion.setBounds(10, 178, 60, 14);
-        contentPane.add(labelQuestion);
-        
-        setPlayer(new JLabel("LameGuest"));
-        getPlayer().setBounds(252, 178, 60, 14);
-        contentPane.add(getPlayer());
-        
-        
-        
+
+        labelPlayer = new JLabel("New label");
+        labelPlayer.setBounds(10, 243, 230, 14);
+        contentPane.add(labelPlayer);
+
+        btnNextQuestion = new JButton("Next question");
+        btnNextQuestion.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                numberOfQuestion = rand.nextInt(57);
+                labelQuestion.setText(x.getListOfQuestions().get(numberOfQuestion).getQuestion().toString());
+                rdbtnA.setText(x.getListOfQuestions().get(numberOfQuestion).getAnswers().get(0).toString());
+                rdbtnB.setText(x.getListOfQuestions().get(numberOfQuestion).getAnswers().get(1).toString());
+                rdbtnC.setText(x.getListOfQuestions().get(numberOfQuestion).getAnswers().get(2).toString());
+                rdbtnD.setText(x.getListOfQuestions().get(numberOfQuestion).getAnswers().get(3).toString());
+                labelA.setIcon(null);
+                labelB.setIcon(null);
+                labelC.setIcon(null);
+                labelD.setIcon(null);
+                rdbtnA.setEnabled(true);
+                rdbtnA.setSelected(false);
+                rdbtnB.setEnabled(true);
+                rdbtnB.setSelected(false);
+                rdbtnC.setEnabled(true);
+                rdbtnC.setSelected(false);
+                rdbtnD.setEnabled(true);
+                rdbtnD.setSelected(false);
+                btnNextQuestion.setVisible(false);
+
+            }
+        });
+        btnNextQuestion.setBounds(475, 402, 125, 23);
+        contentPane.add(btnNextQuestion);
+
     }
-        
-        
 
     public static JLabel getPlayer() {
         return labelPlayer;
     }
-
-    public void setPlayer(JLabel labelPlayer) {
-        Game.labelPlayer = labelPlayer;
-    }
-
 }
