@@ -49,8 +49,16 @@ public class Game extends JFrame {
     /**
      * Create the frame.
      */
+    int numberOfQuestions;
+    public int getLength() {
+        x=new JSONReader(path);
+        x.read();
+        numberOfQuestions = x.getListOfQuestions().size();
+        return numberOfQuestions;
+    }
+    
     Random rand = new Random();
-    int numberOfQuestion = (int) rand.nextInt(56);
+    int questionIndex = (int) rand.nextInt(getLength());
 
     public JButton getNextQuestionButton() {
         return btnNextQuestion;
@@ -64,8 +72,8 @@ public class Game extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
 
-        x = new JSONReader(path);
-        x.read();
+        /*x = new JSONReader(path);
+        x.read();*/
 
         JLabel labelA = new JLabel("");
         labelA.setBounds(10, 277, 16, 23);
@@ -88,16 +96,16 @@ public class Game extends JFrame {
         labelScore.setBounds(374, 243, 91, 14);
         contentPane.add(labelScore);
 
-        JLabel labelQuestion = new JLabel(x.getListOfQuestions().get(numberOfQuestion).getQuestion().toString());
+        JLabel labelQuestion = new JLabel(x.getListOfQuestions().get(questionIndex).getQuestion().toString());
         labelQuestion.setBounds(10, 178, 587, 54);
         contentPane.add(labelQuestion);
-        rdbtnA = new JRadioButton(x.getListOfQuestions().get(numberOfQuestion).getAnswers().get(0));
+        rdbtnA = new JRadioButton(x.getListOfQuestions().get(questionIndex).getAnswers().get(0));
         rdbtnA.setBounds(32, 268, 565, 23);
         rdbtnA.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (rdbtnA.isSelected() == true) {
                     if (rdbtnA.getText().equals(
-                            x.getListOfQuestions().get(numberOfQuestion).getCorrectAnswer().toString())) {
+                            x.getListOfQuestions().get(questionIndex).getCorrectAnswer().toString())) {
                         rdbtnB.setEnabled(false);
                         rdbtnC.setEnabled(false);
                         rdbtnD.setEnabled(false);
@@ -118,13 +126,13 @@ public class Game extends JFrame {
         });
         contentPane.add(rdbtnA);
 
-        rdbtnB = new JRadioButton(x.getListOfQuestions().get(numberOfQuestion).getAnswers().get(1));
+        rdbtnB = new JRadioButton(x.getListOfQuestions().get(questionIndex).getAnswers().get(1));
         rdbtnB.setBounds(32, 297, 565, 23);
         rdbtnB.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (rdbtnB.isSelected() == true) {
                     if (rdbtnB.getText().equals(
-                            x.getListOfQuestions().get(numberOfQuestion).getCorrectAnswer().toString())) {
+                            x.getListOfQuestions().get(questionIndex).getCorrectAnswer().toString())) {
                         rdbtnA.setEnabled(false);
                         rdbtnC.setEnabled(false);
                         rdbtnD.setEnabled(false);
@@ -144,13 +152,13 @@ public class Game extends JFrame {
         });
         contentPane.add(rdbtnB);
 
-        rdbtnC = new JRadioButton(x.getListOfQuestions().get(numberOfQuestion).getAnswers().get(2));
+        rdbtnC = new JRadioButton(x.getListOfQuestions().get(questionIndex).getAnswers().get(2));
         rdbtnC.setBounds(32, 323, 565, 23);
         labelC.setIcon(null);
         rdbtnC.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (rdbtnC.isSelected() == true) {
-                    if (rdbtnC.getText().equals(x.getListOfQuestions().get(numberOfQuestion).getCorrectAnswer().toString())) {
+                    if (rdbtnC.getText().equals(x.getListOfQuestions().get(questionIndex).getCorrectAnswer().toString())) {
                         rdbtnB.setEnabled(false);
                         rdbtnA.setEnabled(false);
                         rdbtnD.setEnabled(false);
@@ -170,12 +178,12 @@ public class Game extends JFrame {
         });
         contentPane.add(rdbtnC);
 
-        rdbtnD = new JRadioButton(x.getListOfQuestions().get(numberOfQuestion).getAnswers().get(3));
+        rdbtnD = new JRadioButton(x.getListOfQuestions().get(questionIndex).getAnswers().get(3));
         rdbtnD.setBounds(32, 349, 565, 23);
         rdbtnD.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (rdbtnD.isSelected() == true) {
-                    if (rdbtnD.getText().equals(x.getListOfQuestions().get(numberOfQuestion).getCorrectAnswer().toString())) {
+                    if (rdbtnD.getText().equals(x.getListOfQuestions().get(questionIndex).getCorrectAnswer().toString())) {
                         rdbtnB.setEnabled(false);
                         rdbtnC.setEnabled(false);
                         rdbtnA.setEnabled(false);
@@ -207,12 +215,12 @@ public class Game extends JFrame {
         btnNextQuestion = new JButton("Next question");
         btnNextQuestion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                numberOfQuestion = rand.nextInt(57);
-                labelQuestion.setText(x.getListOfQuestions().get(numberOfQuestion).getQuestion().toString());
-                rdbtnA.setText(x.getListOfQuestions().get(numberOfQuestion).getAnswers().get(0).toString());
-                rdbtnB.setText(x.getListOfQuestions().get(numberOfQuestion).getAnswers().get(1).toString());
-                rdbtnC.setText(x.getListOfQuestions().get(numberOfQuestion).getAnswers().get(2).toString());
-                rdbtnD.setText(x.getListOfQuestions().get(numberOfQuestion).getAnswers().get(3).toString());
+                questionIndex = rand.nextInt(getLength());
+                labelQuestion.setText(x.getListOfQuestions().get(questionIndex).getQuestion().toString());
+                rdbtnA.setText(x.getListOfQuestions().get(questionIndex).getAnswers().get(0).toString());
+                rdbtnB.setText(x.getListOfQuestions().get(questionIndex).getAnswers().get(1).toString());
+                rdbtnC.setText(x.getListOfQuestions().get(questionIndex).getAnswers().get(2).toString());
+                rdbtnD.setText(x.getListOfQuestions().get(questionIndex).getAnswers().get(3).toString());
                 labelA.setIcon(null);
                 labelB.setIcon(null);
                 labelC.setIcon(null);
