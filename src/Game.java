@@ -70,40 +70,18 @@ public class Game extends JFrame {
         JLabel labelA = new JLabel("");
         labelA.setBounds(10, 277, 16, 23);
         contentPane.setLayout(null);
-<<<<<<< HEAD
-=======
-        labelA.setIcon(new ImageIcon("pics\\kk.png"));
->>>>>>> origin/master
         contentPane.add(labelA);
 
         JLabel labelC = new JLabel("");
-<<<<<<< HEAD
         labelC.setBounds(10, 327, 16, 14);
-=======
-        labelC.setBounds(10, 237, 16, 14);
-        labelC.setVisible(false);
-        labelC.setIcon(new ImageIcon("pics\\cross.png"));
->>>>>>> origin/master
         contentPane.add(labelC);
 
         JLabel labelB = new JLabel("");
-<<<<<<< HEAD
         labelB.setBounds(10, 297, 16, 14);
-=======
-        labelB.setBounds(390, 212, 16, 14);
-        labelB.setVisible(false);
-        labelB.setIcon(new ImageIcon("pics\\cross.png"));
->>>>>>> origin/master
         contentPane.add(labelB);
 
         JLabel labelD = new JLabel("");
-<<<<<<< HEAD
         labelD.setBounds(10, 352, 16, 14);
-=======
-        labelD.setBounds(390, 237, 16, 14);
-        labelD.setVisible(false);
-        labelD.setIcon(new ImageIcon("pics\\cross.png"));
->>>>>>> origin/master
         contentPane.add(labelD);
 
         JLabel labelScore = new JLabel("0");
@@ -219,7 +197,7 @@ public class Game extends JFrame {
 
         JLabel labelLabirinth = new JLabel("");
         labelLabirinth.setBounds(0, 11, 434, 126);
-        labelLabirinth.setIcon(new ImageIcon("pics\\1282889440_46813_1.jpg"));
+        labelLabirinth.setIcon(new ImageIcon("C:\\Users\\Simo\\Desktop\\pics\\1282889440_46813_1.jpg"));
         contentPane.add(labelLabirinth);
 
         labelPlayer = new JLabel("New label");

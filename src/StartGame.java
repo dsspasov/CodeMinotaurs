@@ -100,13 +100,8 @@ public class StartGame {
         btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 20));
         
         lblNewLabel = new JLabel("");
-<<<<<<< HEAD
         lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Simo\\Desktop\\pics\\cat.jpg"));
         lblNewLabel.setBounds(0, 0, 212, 199);
-=======
-        lblNewLabel.setIcon(new ImageIcon("pics\\cat.jpg"));
-        lblNewLabel.setBounds(0, 0, 196, 192);
->>>>>>> origin/master
         startGame.getContentPane().add(lblNewLabel);
         
         
