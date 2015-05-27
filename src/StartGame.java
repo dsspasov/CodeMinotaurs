@@ -83,7 +83,7 @@ public class StartGame {
         startGame.getContentPane().add(lblWriteYourNickname);
         
         lblNewLabel = new JLabel("");
-        lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Simo\\Desktop\\pics\\cat.jpg"));
+        lblNewLabel.setIcon(new ImageIcon("pics\\cat.jpg"));
         lblNewLabel.setBounds(0, 0, 196, 192);
         startGame.getContentPane().add(lblNewLabel);
         
