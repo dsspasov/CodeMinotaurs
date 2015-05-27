@@ -5,16 +5,18 @@ public class Question {
     private String question;
     private List<String> answers;
     private String correctAnswer;
+    private String category;
     private int id;
     
     public Question(){
         super();
     }
      
-    public Question(String question,List<String> answers, String answer, int id){
+    public Question(String question,List<String> answers, String answer, String category, int id){
         this.setQuestion(question);
         this.setAnswers(answers);
         this.setCorrectAnswer(answer);
+        this.setCategory(category);
         this.setId(id);
     }
 
@@ -48,6 +50,14 @@ public class Question {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
     
 }
