@@ -17,6 +17,7 @@ public class Field {
 	Player[] listOfPlayers;
 	private int numberOfPathsForAPlayer; // Depends on the size of the map 
 	Path[] allPaths;
+	public List<Cordinates> startingPossitions;
 
 	Field() {
 		this.numberOfPlayers = 1;
@@ -39,13 +40,42 @@ public class Field {
 			System.out.print("Player[" + i + "] enter your name: ");
 			name = input.nextLine();
 			generateStartingPossition();
-			listOfPlayers[i] = new Player(name, 0, startX, startY);
+			listOfPlayers[i] = new Player(name, 0, startingPossitions.get(i-1).x, startingPossitions.get(i-1).y);
 		}
 	}
+	
+	private void generatePossitions(int numberOfPossitions){
+		numberOfPossitions = this.numberOfPlayers;
+		
+		switch (numberOfPossitions) {
+			
+		case 1:
+			startingPossitions.add(new Cordinates(sizeOfTheField/2, 0));
+			break;
+		case 2:
+			startingPossitions.add(new Cordinates(sizeOfTheField/2, 0));
+			startingPossitions.add(new Cordinates(sizeOfTheField/2,sizeOfTheField - 1));
+			break;
+		case 3:
+			startingPossitions.add(new Cordinates(sizeOfTheField/2, 0));
+			startingPossitions.add(new Cordinates(sizeOfTheField/2,sizeOfTheField - 1));
+			startingPossitions.add(new Cordinates(0, sizeOfTheField/2));
+			break;
+		case 4:
+			startingPossitions.add(new Cordinates(sizeOfTheField/2, 0));
+			startingPossitions.add(new Cordinates(sizeOfTheField/2,sizeOfTheField - 1));
+			startingPossitions.add(new Cordinates(0, sizeOfTheField/2));
+			startingPossitions.add(new Cordinates(sizeOfTheField - 1, sizeOfTheField/2));
+			break;
+		}
+	}
+		
+	
 
 	private void generateStartingPossition() { // It can drop a player on 2*k or 2*k+1 place so it is not fair but we can change it.
 		Random a = new Random();
 		Random b = new Random();
+		int numberOfPlayers = this.numberOfPlayers;
 		int sideOfTheField = b.nextInt(4);
 		int minToMax = a.nextInt(sizeOfTheField);
 		
