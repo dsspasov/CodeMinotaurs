@@ -1,68 +1,188 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * @author Lazarov94
  *
  */
-public class Field {	
+public class Field {
 	Question[][] matrix;
-	int numberOfPlayers;
-	int sizeOfTheField;
-	List<Question> questionsFromDB; // The questions from the data base 
-	int startX;
-	int startY;
-	Player[] listOfPlayers;
-	
-	Field(){
+	private int numberOfPlayers; // 
+	private int sizeOfTheField;
+	List<Question> questionsFromDB; // The questions from the data base
+	List<Player> listOfPlayers;
+	private int numberOfPathsForAPlayer; // Depends on the size of the map 
+	public List<Cordinates> startingPossitions;
+
+	Field() {
 		this.numberOfPlayers = 1;
 		sizeOfTheField = 5;
+		generatePossitions(1);
 	}
-	
-	Field(int numberOfPayers, int sizeOfTheField){
-		this.numberOfPlayers = numberOfPayers;
+
+	Field(int sizeOfTheField, List<Player> listOfPlayers) {
+		this.numberOfPlayers = listOfPlayers.size();
 		this.sizeOfTheField = sizeOfTheField;
+		this.numberOfPathsForAPlayer = 4; // it depends on the size they want but it is 4 for now.
+		generatePossitions(this.numberOfPlayers);
 	}
-	private void generatePlayers(){
-		generateStartingPossition();
-		listOfPlayers = new Player[numberOfPlayers];
-		for(int i = 0 ; i < numberOfPlayers ; i++){
-			listOfPlayers[i] = new Player("", 0, startX, startY);
+
+	private void generatePlayersPossitions() {
+		
+		for (int i = 0; i < numberOfPlayers; i++) { // the list of players and the list of startingPossitions is with same number of elements
+			listOfPlayers.get(i).setxCoordinate(startingPossitions.get(i).x);  
+			listOfPlayers.get(i).setyCoordinate(startingPossitions.get(i).y);
 		}
 	}
 	
-	private void generateStartingPossition(){
+	private void generatePossitions(int numberOfPossitions){
+		numberOfPossitions = this.numberOfPlayers;
+		
+		switch (numberOfPossitions) {
+			
+		case 1:
+			startingPossitions.add(new Cordinates(sizeOfTheField/2, 0));
+			break;
+		case 2:
+			startingPossitions.add(new Cordinates(sizeOfTheField/2, 0));
+			startingPossitions.add(new Cordinates(sizeOfTheField/2,sizeOfTheField - 1));
+			break;
+		case 3:
+			startingPossitions.add(new Cordinates(sizeOfTheField/2, 0));
+			startingPossitions.add(new Cordinates(sizeOfTheField/2,sizeOfTheField - 1));
+			startingPossitions.add(new Cordinates(0, sizeOfTheField/2));
+			break;
+		case 4:
+			startingPossitions.add(new Cordinates(sizeOfTheField/2, 0));
+			startingPossitions.add(new Cordinates(sizeOfTheField/2,sizeOfTheField - 1));
+			startingPossitions.add(new Cordinates(0, sizeOfTheField/2));
+			startingPossitions.add(new Cordinates(sizeOfTheField - 1, sizeOfTheField/2));
+			break;
+		}
+	}
+		
+	
+
+	/*private void generateStartingPossition() { // It can drop a player on 2*k or 2*k+1 place so it is not fair but we can change it.
 		Random a = new Random();
-		Random posX = new Random();
-		int sideOfTheField = posX.nextInt(4);
+		Random b = new Random();
+		int numberOfPlayers = this.numberOfPlayers;
+		int sideOfTheField = b.nextInt(4);
 		int minToMax = a.nextInt(sizeOfTheField);
+		
 		switch (sideOfTheField) {
-		  
-		  case 0:
-			  startX = 0;
-			  startY = minToMax;
-			  	break;
-		  case 1:
-			  startX = minToMax;
-			  startY = 0;
-		        break;
-		  case 2: 
-			  startX = sizeOfTheField-1;
-			  startY = minToMax;
-		        break;
-		  case 3:
-			  startX = minToMax;
-			  startY = sizeOfTheField-1;
-		        break;
+		case 0:
+			startX = 0;
+			startY = minToMax;
+			break;
+		case 1:
+			startX = minToMax;
+			startY = 0;
+			break;
+		case 2:
+			startX = sizeOfTheField - 1;
+			startY = minToMax;
+			break;
+		case 3:
+			startX = minToMax;
+			startY = sizeOfTheField - 1;
+			break;
 		}
-	}
-	
-	private void generateField(){
-		matrix = new Question[sizeOfTheField][sizeOfTheField];
-			for(int i = 0; i < matrix.length ; i++){
-				
-			}
+	}*/
+
+	private void generatePathsForPlayersInTheMatrix() {
 		
 	}
+	Path randomPathGenerator(Cordinates from, Cordinates to, int lenghtOfThePath){
+		
+		
+		
+		return null;
+		
+		
+	}
+
+}
+
+class Cordinates {
+	int x;
+	int y;
+
+	Cordinates(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
 	
+	public void set(int x, int y){
+		this.x = x;
+		this.y = y;
+	}
+	public void setX(int x){
+		this.x = x;
+	}
+	public void setY(int y){
+		this.y = y;
+	}
+	
+	public int getX(){
+		return this.x;
+	}
+	public int getY(){
+		return this.y;
+	}
+	
+	boolean equals(Cordinates a){
+		if(this.x == a.x && this.y== a.y){
+			return true;
+		} else {
+			return false;
+		}
+	}
+}
+class Path {
+	public List<Cordinates> listOfCordinates;
+	public int length;
+	
+	Path(int length){
+		listOfCordinates = new ArrayList<Cordinates>();
+		this.length = length;
+	}
+	void add(Cordinates a){
+		listOfCordinates.add(a);
+	}
+	public void pathGenerator(Cordinates from, Cordinates to){
+		Random a = new Random();
+		int fromX = from.x;
+		int fromY = from.y;
+		int minNumberOfSteps = (to.x - from.x) + (to.y - from.y);
+		listOfCordinates.add(new Cordinates(fromX, fromY)); // we have got the 1st point here so the loop will iterate -1
+		if(length == minNumberOfSteps){
+		int i = 0;
+				while(i!= minNumberOfSteps-1){
+				if(fromX < to.x){
+					fromX++;
+					listOfCordinates.add(new Cordinates(fromX, fromY));
+					i++;
+				} else {
+					fromX--;
+					listOfCordinates.add(new Cordinates(fromX, fromY));
+					i++;
+				}
+				
+				if(fromY < to.y){
+					fromY++;
+					listOfCordinates.add(new Cordinates(fromX, fromY));
+					i++;
+				} else {
+					fromY--;
+					listOfCordinates.add(new Cordinates(fromX, fromY));
+					i++;
+				}
+				
+			}
+		}
+		//return null;
+	}
 }
