@@ -12,11 +12,8 @@ public class Field {
 	private int numberOfPlayers; // 
 	private int sizeOfTheField;
 	List<Question> questionsFromDB; // The questions from the data base
-	private int startX;
-	private int startY;
 	List<Player> listOfPlayers;
 	private int numberOfPathsForAPlayer; // Depends on the size of the map 
-	Path[] allPaths;
 	public List<Cordinates> startingPossitions;
 
 	Field() {
@@ -117,6 +114,25 @@ class Cordinates {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public void set(int x, int y){
+		this.x = x;
+		this.y = y;
+	}
+	public void setX(int x){
+		this.x = x;
+	}
+	public void setY(int y){
+		this.y = y;
+	}
+	
+	public int getX(){
+		return this.x;
+	}
+	public int getY(){
+		return this.y;
+	}
+	
 	boolean equals(Cordinates a){
 		if(this.x == a.x && this.y== a.y){
 			return true;
@@ -133,8 +149,40 @@ class Path {
 		listOfCordinates = new ArrayList<Cordinates>();
 		this.length = length;
 	}
-	
 	void add(Cordinates a){
 		listOfCordinates.add(a);
+	}
+	public void pathGenerator(Cordinates from, Cordinates to){
+		Random a = new Random();
+		int fromX = from.x;
+		int fromY = from.y;
+		int minNumberOfSteps = (to.x - from.x) + (to.y - from.y);
+		listOfCordinates.add(new Cordinates(fromX, fromY)); // we have got the 1st point here so the loop will iterate -1
+		if(length == minNumberOfSteps){
+		int i = 0;
+				while(i!= minNumberOfSteps-1){
+				if(fromX < to.x){
+					fromX++;
+					listOfCordinates.add(new Cordinates(fromX, fromY));
+					i++;
+				} else {
+					fromX--;
+					listOfCordinates.add(new Cordinates(fromX, fromY));
+					i++;
+				}
+				
+				if(fromY < to.y){
+					fromY++;
+					listOfCordinates.add(new Cordinates(fromX, fromY));
+					i++;
+				} else {
+					fromY--;
+					listOfCordinates.add(new Cordinates(fromX, fromY));
+					i++;
+				}
+				
+			}
+		}
+		//return null;
 	}
 }
