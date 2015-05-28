@@ -7,7 +7,9 @@ public class RandomQuestion {
 	private List<Question> medium = new ArrayList<Question>();
 	private List<Question> hard = new ArrayList<Question>();
 	
-	public void filler (List<Question> listOfQuestions) {
+	List<Question> listOfQuestions = new A
+	
+	public void filler () {
 		
 		for (Question question : listOfQuestions) {
 			if(question.getId() == 1) {
