@@ -55,7 +55,7 @@ public class Game extends JFrame {
     public int getLength() {
         x = new JSONReader(path);
         x.read();
-        numberOfQuestions = x.getListOfQuestions().size();
+        numberOfQuestions = x.read().size();
         return numberOfQuestions;
     }
 
@@ -105,16 +105,16 @@ public class Game extends JFrame {
         labelScore.setBounds(413, 348, 91, 14);
         contentPane.add(labelScore);
 
-        JLabel labelQuestion = new JLabel(x.getListOfQuestions().get(questionIndex).getQuestion().toString());
+        JLabel labelQuestion = new JLabel(x.read().get(questionIndex).getQuestion().toString());
         labelQuestion.setBounds(10, 178, 730, 107);
         contentPane.add(labelQuestion);
-        rdbtnA = new JRadioButton(x.getListOfQuestions().get(questionIndex).getAnswers().get(0));
+        rdbtnA = new JRadioButton(x.read().get(questionIndex).getAnswers().get(0));
         rdbtnA.setBounds(71, 376, 565, 23);
         rdbtnA.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (rdbtnA.isSelected() == true) {
                     if (rdbtnA.getText()
-                            .equals(x.getListOfQuestions().get(questionIndex).getCorrectAnswer().toString())) {
+                            .equals(x.read().get(questionIndex).getCorrectAnswer().toString())) {
                         disableAll();
                         labelA.setIcon(checkIcon);
                         DrawingLogic.closeLabirinthFrame();
@@ -145,13 +145,13 @@ public class Game extends JFrame {
         });
         contentPane.add(rdbtnA);
 
-        rdbtnB = new JRadioButton(x.getListOfQuestions().get(questionIndex).getAnswers().get(1));
+        rdbtnB = new JRadioButton(x.read().get(questionIndex).getAnswers().get(1));
         rdbtnB.setBounds(71, 402, 565, 23);
         rdbtnB.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (rdbtnB.isSelected() == true) {
                     if (rdbtnB.getText()
-                            .equals(x.getListOfQuestions().get(questionIndex).getCorrectAnswer().toString())) {
+                            .equals(x.read().get(questionIndex).getCorrectAnswer().toString())) {
                         disableAll();
                         labelB.setIcon(checkIcon);
                         DrawingLogic.closeLabirinthFrame();
@@ -181,14 +181,14 @@ public class Game extends JFrame {
         });
         contentPane.add(rdbtnB);
 
-        rdbtnC = new JRadioButton(x.getListOfQuestions().get(questionIndex).getAnswers().get(2));
+        rdbtnC = new JRadioButton(x.read().get(questionIndex).getAnswers().get(2));
         rdbtnC.setBounds(71, 428, 565, 23);
         labelC.setIcon(null);
         rdbtnC.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (rdbtnC.isSelected() == true) {
                     if (rdbtnC.getText()
-                            .equals(x.getListOfQuestions().get(questionIndex).getCorrectAnswer().toString())) {
+                            .equals(x.read().get(questionIndex).getCorrectAnswer().toString())) {
                         disableAll();
                         labelC.setIcon(checkIcon);
                         DrawingLogic.closeLabirinthFrame();
@@ -219,13 +219,13 @@ public class Game extends JFrame {
         });
         contentPane.add(rdbtnC);
 
-        rdbtnD = new JRadioButton(x.getListOfQuestions().get(questionIndex).getAnswers().get(3));
+        rdbtnD = new JRadioButton(x.read().get(questionIndex).getAnswers().get(3));
         rdbtnD.setBounds(71, 454, 565, 23);
         rdbtnD.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (rdbtnD.isSelected() == true) {
                     if (rdbtnD.getText()
-                            .equals(x.getListOfQuestions().get(questionIndex).getCorrectAnswer().toString())) {
+                            .equals(x.read().get(questionIndex).getCorrectAnswer().toString())) {
                         disableAll();
                         labelD.setIcon(checkIcon);
                         DrawingLogic.closeLabirinthFrame();
@@ -266,11 +266,11 @@ public class Game extends JFrame {
         btnNextQuestion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 questionIndex = rand.nextInt(getLength());
-                labelQuestion.setText(x.getListOfQuestions().get(questionIndex).getQuestion().toString());
-                rdbtnA.setText(x.getListOfQuestions().get(questionIndex).getAnswers().get(0).toString());
-                rdbtnB.setText(x.getListOfQuestions().get(questionIndex).getAnswers().get(1).toString());
-                rdbtnC.setText(x.getListOfQuestions().get(questionIndex).getAnswers().get(2).toString());
-                rdbtnD.setText(x.getListOfQuestions().get(questionIndex).getAnswers().get(3).toString());
+                labelQuestion.setText(x.read().get(questionIndex).getQuestion().toString());
+                rdbtnA.setText(x.read().get(questionIndex).getAnswers().get(0).toString());
+                rdbtnB.setText(x.read().get(questionIndex).getAnswers().get(1).toString());
+                rdbtnC.setText(x.read().get(questionIndex).getAnswers().get(2).toString());
+                rdbtnD.setText(x.read().get(questionIndex).getAnswers().get(3).toString());
                 labelA.setIcon(null);
                 labelB.setIcon(null);
                 labelC.setIcon(null);
