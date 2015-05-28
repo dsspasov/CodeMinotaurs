@@ -20,7 +20,7 @@ public class Game extends JFrame {
     /**
      * 
      */
-    private static final long serialVersionUID = 4503868451640434191L;
+   private static final long serialVersionUID = 4503868451640434191L;
     private JPanel contentPane;
     private JSONReader x;
     private String path = "C:/Users/Simo/Desktop/questions.json";
@@ -33,7 +33,7 @@ public class Game extends JFrame {
     /**
      * Launch the application.
      */
-    public static void main(String[] args) {
+   public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
