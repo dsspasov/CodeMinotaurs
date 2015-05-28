@@ -29,9 +29,7 @@ public class JSONReader {
     public static List<Question> getListOfQuestions(){
         return JSONReader.listOfQuestions;
     }
-    
-    
-    
+ 
     public List<Question> read() {
         JSONParser parser = new JSONParser();
         JSONReader.listOfQuestions = null; 
