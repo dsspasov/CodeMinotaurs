@@ -1,4 +1,6 @@
-import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,20 +33,22 @@ public class JSONReader {
     public void read() {
         JSONParser parser = new JSONParser();
         try {
-            Object obj = parser.parse(new FileReader(this.getPath()));
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(this.getPath()), "UTF-8"));
+
+            Object obj = parser.parse(in);
 
             JSONArray listOfObjects = (JSONArray) obj;
 
             for (Object object : listOfObjects) {
                 JSONObject jsonObject = (JSONObject) object;
 
-                int id = (int) jsonObject.get("id");
+                String id = (String) jsonObject.get("id");
                 String question = (String) jsonObject.get("question");
                 String correctAnswer = (String) jsonObject.get("correctAnswer");
-                String category = (String) "";
+                String category = (String) jsonObject.get("category");
                 JSONArray listOfAnswers = (JSONArray) jsonObject.get("listOfAnswers");
                 List<String> answers = new ArrayList<String>();
-
                 for (Object answer : listOfAnswers.toArray()) {
                     answers.add((String) answer);
                 }
@@ -58,11 +62,12 @@ public class JSONReader {
         }
 
     }
-    /*
-     * public static void main(String[] args) { String path =
-     * "C:/Users/user/Desktop/questions.json"; JSONReader x =new
-     * JSONReader(path); x.read();
-     * System.out.println(x.getListOfQuestions().get(
-     * 0).getCorrectAnswer().toString()); }
-     */
+/*
+    public static void main(String[] args) {
+        String path = "C:\\Users\\user\\Documents\\GitHub\\CodeMinotaurs\\questions.json";
+        JSONReader x = new JSONReader(path);
+        x.read();
+        System.out.println(x.getListOfQuestions().get(0).getCorrectAnswer().toString());
+    }
+*/
 }
