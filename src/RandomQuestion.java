@@ -7,7 +7,7 @@ public class RandomQuestion {
 	private List<Question> medium = new ArrayList<Question>();
 	private List<Question> hard = new ArrayList<Question>();
 	
-	List<Question> listOfQuestions = new A
+	List<Question> listOfQuestions = new ArrayList<Question>();
 	
 	public void filler () {
 		
