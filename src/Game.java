@@ -76,16 +76,17 @@ public class Game extends JFrame {
     }
 
     public Game() {
+        DrawingLogic.drawInitialLabirinth();
         setTitle("Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 800, 600);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
+        contentPane.setLayout(null);
 
         JLabel labelA = new JLabel("");
         labelA.setBounds(49, 382, 16, 14);
-        contentPane.setLayout(null);
         contentPane.add(labelA);
 
         JLabel labelC = new JLabel("");
@@ -116,6 +117,8 @@ public class Game extends JFrame {
                             .equals(x.read().get(questionIndex).getCorrectAnswer().toString())) {
                         disableAll();
                         labelA.setIcon(checkIcon);
+                        DrawingLogic.closeLabirinthFrame();
+                        DrawingLogic.drawInitialLabirinth();
                         killingSpree++;
                         if (killingSpree == 3) {
                             try {
@@ -130,6 +133,8 @@ public class Game extends JFrame {
                     } else {
                         killingSpree = 0;
                         disableAll();
+                        DrawingLogic.closeLabirinthFrame();
+                        DrawingLogic.drawInitialLabirinth();
                         labelA.setIcon(crossIcon);
                         btnNextQuestion.setVisible(true);
                     }
@@ -149,6 +154,8 @@ public class Game extends JFrame {
                             .equals(x.read().get(questionIndex).getCorrectAnswer().toString())) {
                         disableAll();
                         labelB.setIcon(checkIcon);
+                        DrawingLogic.closeLabirinthFrame();
+                        DrawingLogic.drawInitialLabirinth();
                         killingSpree++;
                         if (killingSpree == 3) {
                             try {
@@ -164,6 +171,8 @@ public class Game extends JFrame {
                     } else {
                         killingSpree = 0;
                         disableAll();
+                        DrawingLogic.closeLabirinthFrame();
+                        DrawingLogic.drawInitialLabirinth();
                         labelB.setIcon(crossIcon);
                         btnNextQuestion.setVisible(true);
                     }
@@ -182,6 +191,8 @@ public class Game extends JFrame {
                             .equals(x.read().get(questionIndex).getCorrectAnswer().toString())) {
                         disableAll();
                         labelC.setIcon(checkIcon);
+                        DrawingLogic.closeLabirinthFrame();
+                        DrawingLogic.drawInitialLabirinth();
                         killingSpree++;
                         if (killingSpree == 3) {
                             try {
@@ -197,6 +208,8 @@ public class Game extends JFrame {
                     } else {
                         killingSpree = 0;
                         disableAll();
+                        DrawingLogic.closeLabirinthFrame();
+                        DrawingLogic.drawInitialLabirinth();
                         labelC.setIcon(crossIcon);
                         btnNextQuestion.setVisible(true);
                     }
@@ -215,6 +228,8 @@ public class Game extends JFrame {
                             .equals(x.read().get(questionIndex).getCorrectAnswer().toString())) {
                         disableAll();
                         labelD.setIcon(checkIcon);
+                        DrawingLogic.closeLabirinthFrame();
+                        DrawingLogic.drawInitialLabirinth();
                         killingSpree++;
                         if (killingSpree == 3) {
                             try {
@@ -230,6 +245,8 @@ public class Game extends JFrame {
                         } else {
                             killingSpree = 0;
                             disableAll();
+                            DrawingLogic.closeLabirinthFrame();
+                            DrawingLogic.drawInitialLabirinth();
                             labelD.setIcon(crossIcon);
                             btnNextQuestion.setVisible(true);
                         }
@@ -240,16 +257,12 @@ public class Game extends JFrame {
         });
         contentPane.add(rdbtnD);
 
-        JLabel labelLabirinth = new JLabel("");
-        labelLabirinth.setBounds(0, 11, 434, 126);
-        labelLabirinth.setIcon(new ImageIcon("C:\\Users\\Simo\\Desktop\\pics\\1282889440_46813_1.jpg"));
-        contentPane.add(labelLabirinth);
-
         labelPlayer = new JLabel("New label");
         labelPlayer.setBounds(71, 348, 230, 14);
         contentPane.add(labelPlayer);
 
         btnNextQuestion = new JButton("Next question");
+        btnNextQuestion.setBounds(514, 507, 125, 23);
         btnNextQuestion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 questionIndex = rand.nextInt(getLength());
@@ -270,12 +283,13 @@ public class Game extends JFrame {
                 rdbtnC.setSelected(false);
                 rdbtnD.setEnabled(true);
                 rdbtnD.setSelected(false);
+                DrawingLogic.closeLabirinthFrame();
                 btnNextQuestion.setVisible(false);
 
             }
         });
-        btnNextQuestion.setBounds(514, 507, 125, 23);
         contentPane.add(btnNextQuestion);
+        
 
     }
 
