@@ -21,7 +21,8 @@ class Path {
 	}
 	
 	public void pathGenerator(Cordinates from, Cordinates to){
-		Random a = new Random();
+		@SuppressWarnings("unused")
+        Random a = new Random();
 		int fromX = from.x;
 		int fromY = from.y;
 		int minNumberOfSteps = Math.abs((to.x - from.x) + (to.y - from.y));

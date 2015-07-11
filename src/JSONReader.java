@@ -43,7 +43,7 @@ public class JSONReader {
 
             for (Object object : listOfObjects) {
                 JSONObject jsonObject = (JSONObject) object;
-                String id = (String) jsonObject.get("id");
+                int id = (int) jsonObject.get("id");
                 String question = (String) jsonObject.get("question");
                 String correctAnswer = (String) jsonObject.get("correctAnswer");
                 String category = (String) jsonObject.get("category");

@@ -1,7 +1,4 @@
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
 
 /**
  * @author Lazarov94
@@ -25,11 +22,12 @@ public class Field {
 	Field(int sizeOfTheField, List<Player> listOfPlayers) {
 		this.numberOfPlayers = listOfPlayers.size();
 		this.sizeOfTheField = sizeOfTheField;
-		this.numberOfPathsForAPlayer = 4; // it depends on the size they want but it is 4 for now.
+		this.setNumberOfPathsForAPlayer(4); // it depends on the size they want but it is 4 for now.
 		generatePossitions(this.numberOfPlayers);
 	}
 
-	private void generatePlayersPossitions() {
+	@SuppressWarnings("unused")
+    private void generatePlayersPossitions() {
 		
 		for (int i = 0; i < numberOfPlayers; i++) { // the list of players and the list of startingPossitions is with same number of elements
 			listOfPlayers.get(i).setxCoordinate(startingPossitions.get(i).x);  
@@ -64,14 +62,24 @@ public class Field {
 	}
 
 
-	private void generatePathsForPlayersInTheMatrix() {
+	@SuppressWarnings("unused")
+    private void generatePathsForPlayersInTheMatrix() {
 		
 	}
 	
-	private Path randomPathGenerator(Cordinates from, Cordinates to, int lenghtOfThePath){
+	@SuppressWarnings("unused")
+    private Path randomPathGenerator(Cordinates from, Cordinates to, int lenghtOfThePath){
 		
 		return null;
 	}
+
+    public int getNumberOfPathsForAPlayer() {
+        return numberOfPathsForAPlayer;
+    }
+
+    public void setNumberOfPathsForAPlayer(int numberOfPathsForAPlayer) {
+        this.numberOfPathsForAPlayer = numberOfPathsForAPlayer;
+    }
 
 }
 

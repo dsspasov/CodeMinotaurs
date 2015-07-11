@@ -6,13 +6,13 @@ public class Question {
     private List<String> answers;
     private String correctAnswer;
     private String category;
-    private String id;
+    private int id;
     
     public Question(){
         super();
     }
      
-    public Question(String question,List<String> answers, String answer, String category, String id){
+    public Question(String question,List<String> answers, String answer, String category, int id){
         this.setQuestion(question);
         this.setAnswers(answers);
         this.setCorrectAnswer(answer);
@@ -44,11 +44,11 @@ public class Question {
         this.answers = answers;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

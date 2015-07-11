@@ -11,7 +11,7 @@ public class RandomQuestion {
 	
 	public void filler () {
 		
-		for (Question question : listOfQuestions) {
+		for (Question question : this.listOfQuestions) {
 			if(question.getId() == 1) {
 				easy.add(question);
 			} else if (question.getId() == 2) {
@@ -23,7 +23,7 @@ public class RandomQuestion {
 	}
 	
 	public RandomQuestion () {
-		this.easy = filler(listOfQuestions);
+		this.filler();
 	}
 	
 	public Question getEasyQuestion (List<Question> easy) {

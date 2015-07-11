@@ -1,7 +1,6 @@
 import java.io.FileWriter;
 import java.io.IOException;
 
-import com.google.gson.Gson;
 import com.google.gson.stream.JsonWriter;
 
 
@@ -17,7 +16,7 @@ public class JSONWriter {
     }
 
     public static void main(String[] args) throws IOException {
-        Gson g = new Gson();
+      //  Gson g = new Gson();
         JsonWriter gw = new JsonWriter(new FileWriter("test.json", true));
         gw.beginArray();
         
